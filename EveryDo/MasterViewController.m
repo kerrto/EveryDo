@@ -9,6 +9,7 @@
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 #import "ToDoStuff.h"
+#import "MyToDoCell.h"
 
 @interface MasterViewController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -138,11 +139,12 @@ self.navigationItem.leftBarButtonItem = self.editButtonItem;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    MyToDoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyToDoCell" forIndexPath:indexPath];
 
     ToDoStuff *currentItem = self.toDoItems[indexPath.row];
-    cell.textLabel.text = currentItem.title;
-    cell.detailTextLabel.text=currentItem.doDescription;
+    cell.toDoLabel.text = currentItem.title;
+    cell.detailLabel.text=currentItem.doDescription;
+    cell.priorityLabel.text=@(currentItem.priority).stringValue;
 
     return cell;
 }

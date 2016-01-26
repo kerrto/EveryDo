@@ -17,6 +17,7 @@
 		ABCCD6411C57D1F600033635 /* EveryDoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCCD6401C57D1F600033635 /* EveryDoTests.m */; };
 		ABCCD64C1C57D1F600033635 /* EveryDoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCCD64B1C57D1F600033635 /* EveryDoUITests.m */; };
 		ABCCD65E1C57D94100033635 /* ToDoStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCCD65D1C57D94100033635 /* ToDoStuff.m */; };
+		ABCCD6671C57F8FC00033635 /* MyToDoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCCD6661C57F8FC00033635 /* MyToDoCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		ABCCD64D1C57D1F600033635 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABCCD65C1C57D94100033635 /* ToDoStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoStuff.h; sourceTree = "<group>"; };
 		ABCCD65D1C57D94100033635 /* ToDoStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoStuff.m; sourceTree = "<group>"; };
+		ABCCD6651C57F8FC00033635 /* MyToDoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyToDoCell.h; path = ../MyToDoCell.h; sourceTree = "<group>"; };
+		ABCCD6661C57F8FC00033635 /* MyToDoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyToDoCell.m; path = ../MyToDoCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				ABCCD62D1C57D1F600033635 /* DetailViewController.m */,
 				ABCCD65C1C57D94100033635 /* ToDoStuff.h */,
 				ABCCD65D1C57D94100033635 /* ToDoStuff.m */,
+				ABCCD6651C57F8FC00033635 /* MyToDoCell.h */,
+				ABCCD6661C57F8FC00033635 /* MyToDoCell.m */,
 				ABCCD62F1C57D1F600033635 /* Main.storyboard */,
 				ABCCD6321C57D1F600033635 /* Assets.xcassets */,
 				ABCCD6341C57D1F600033635 /* LaunchScreen.storyboard */,
@@ -286,6 +291,7 @@
 				ABCCD65E1C57D94100033635 /* ToDoStuff.m in Sources */,
 				ABCCD6281C57D1F600033635 /* AppDelegate.m in Sources */,
 				ABCCD62B1C57D1F600033635 /* MasterViewController.m in Sources */,
+				ABCCD6671C57F8FC00033635 /* MyToDoCell.m in Sources */,
 				ABCCD6251C57D1F600033635 /* main.m in Sources */,
 				ABCCD62E1C57D1F600033635 /* DetailViewController.m in Sources */,
 			);
