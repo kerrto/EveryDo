@@ -10,16 +10,15 @@
 #import "DetailViewController.h"
 #import "ToDoStuff.h"
 #import "MyToDoCell.h"
+#import "AddToDoViewController.h"
 
-@interface MasterViewController () <UITableViewDataSource,UITableViewDelegate>
+@interface MasterViewController () <UITableViewDataSource,UITableViewDelegate,AddToDoViewControllerDelegate>
 
 @property NSMutableArray *toDoItems;
-@property (nonatomic, strong) IBOutlet UITableView *toDoItemTable;
-
 
 @end
 
-@implementation MasterViewController 
+@implementation MasterViewController
 
 
 
@@ -63,17 +62,15 @@
     
     ToDoStuff *exercise =[[ToDoStuff alloc] initWithTitle:@"Exercise" doDescription:@"Shape your bod" priorityNumber:3 completedIndicator:@"Incomplete"];
     
-[self.toDoItems addObjectsFromArray:@[cleanUp, doHomework, exercise]];
-    
-    self.toDoItemTable.dataSource=self;
-    self.toDoItemTable.delegate=self;
+    [self.toDoItems addObjectsFromArray:@[cleanUp, doHomework, exercise]];
     
     
     
-self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    
+    
+    
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
@@ -82,18 +79,13 @@ self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [super viewWillAppear:animated];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)insertNewObject:(id)sender {
-    if (!self.toDoItems) {
-        self.toDoItems = [[NSMutableArray alloc] init];
-    }
-    [self.toDoItems insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.toDoItems.count-1 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    //    if (!self.toDoItems) {
+    //        self.toDoItems = [[NSMutableArray alloc] init];
+    //    }
+    //    [self.toDoItems insertObject:[NSDate date] atIndex:0];
+    //    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.toDoItems.count-1 inSection:0];
+    //    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 
@@ -102,7 +94,7 @@ self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.toDoItemTable indexPathForSelectedRow];
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSString *toDoItem= self.toDoItems[indexPath.row];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
         [controller setDetailItem:toDoItem];
@@ -110,21 +102,21 @@ self.navigationItem.leftBarButtonItem = self.editButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
     
-//    - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//        
-//        if ([segue.identifier isEqualToString:@"showFoodItem"]) {
-//            
-//            // Get the selected index path
-//            NSIndexPath *selectedIndexPath = [self.foodTable indexPathForSelectedRow];
-//            
-//            // Use the selected index path to get the food object it was displaying
-//            Food *selectedFood = self.foodItems[selectedIndexPath.row];
-//            
-//            // Pass that to our new view controller
-//            DetailViewController *dvc = (DetailViewController *)segue.destinationViewController;
-//            dvc.foodObject = selectedFood;
-//        }
-//    }
+    //    - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    //
+    //        if ([segue.identifier isEqualToString:@"showFoodItem"]) {
+    //
+    //            // Get the selected index path
+    //            NSIndexPath *selectedIndexPath = [self.foodTable indexPathForSelectedRow];
+    //
+    //            // Use the selected index path to get the food object it was displaying
+    //            Food *selectedFood = self.foodItems[selectedIndexPath.row];
+    //
+    //            // Pass that to our new view controller
+    //            DetailViewController *dvc = (DetailViewController *)segue.destinationViewController;
+    //            dvc.foodObject = selectedFood;
+    //        }
+    //    }
     
 }
 
@@ -139,13 +131,31 @@ self.navigationItem.leftBarButtonItem = self.editButtonItem;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     MyToDoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyToDoCell" forIndexPath:indexPath];
-
+    
     ToDoStuff *currentItem = self.toDoItems[indexPath.row];
-    cell.toDoLabel.text = currentItem.title;
-    cell.detailLabel.text=currentItem.doDescription;
-    cell.priorityLabel.text=@(currentItem.priority).stringValue;
+    
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:currentItem.title];
+    NSMutableAttributedString *desc = [[NSMutableAttributedString alloc] initWithString:currentItem.doDescription];
+    NSMutableAttributedString *priority = [[NSMutableAttributedString alloc] initWithString:@(currentItem.priority).stringValue];
+    
+    // alloc 3 mutable
+    
+    if ([currentItem.completedIndicator isEqualToString:@"Completed"]) {
+        
+        NSDictionary* strikeThrough = @{
+                                        NSStrikethroughStyleAttributeName: @(1)};
+        [title addAttributes:strikeThrough range:NSMakeRange(0, title.length)];
+        [desc addAttributes:strikeThrough range:NSMakeRange(0, desc.length)];
+        [priority addAttributes:strikeThrough range:NSMakeRange(0, priority.length)];
+    }
 
+    
+    cell.toDoLabel.attributedText = title;
+    cell.detailLabel.attributedText= desc;
+    cell.priorityLabel.attributedText= priority;
+    
     return cell;
 }
 

@@ -19,7 +19,6 @@
         _completedIndicator=completed;
     }
     return self;
-    
 }
 
 @end

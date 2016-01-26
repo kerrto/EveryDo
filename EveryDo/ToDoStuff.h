@@ -17,7 +17,4 @@
 
 -(instancetype)initWithTitle:(NSString*)title doDescription:(NSString *)description priorityNumber:(int)priority completedIndicator:(NSString*)completed;
 
-
-
-
 @end
