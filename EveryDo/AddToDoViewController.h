@@ -22,6 +22,8 @@
 
 @interface AddToDoViewController : UIViewController
 
+@property (nonatomic, weak) id <AddToDoViewControllerDelegate> delegate;
+
 
 @property (strong, nonatomic) IBOutlet UITextField *toDoInput;
 
