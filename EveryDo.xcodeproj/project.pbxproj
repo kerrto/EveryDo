@@ -16,6 +16,7 @@
 		ABCCD6361C57D1F600033635 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABCCD6341C57D1F600033635 /* LaunchScreen.storyboard */; };
 		ABCCD6411C57D1F600033635 /* EveryDoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCCD6401C57D1F600033635 /* EveryDoTests.m */; };
 		ABCCD64C1C57D1F600033635 /* EveryDoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCCD64B1C57D1F600033635 /* EveryDoUITests.m */; };
+		ABCCD65E1C57D94100033635 /* ToDoStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCCD65D1C57D94100033635 /* ToDoStuff.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		ABCCD6471C57D1F600033635 /* EveryDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EveryDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABCCD64B1C57D1F600033635 /* EveryDoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EveryDoUITests.m; sourceTree = "<group>"; };
 		ABCCD64D1C57D1F600033635 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABCCD65C1C57D94100033635 /* ToDoStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoStuff.h; sourceTree = "<group>"; };
+		ABCCD65D1C57D94100033635 /* ToDoStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoStuff.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 				ABCCD62A1C57D1F600033635 /* MasterViewController.m */,
 				ABCCD62C1C57D1F600033635 /* DetailViewController.h */,
 				ABCCD62D1C57D1F600033635 /* DetailViewController.m */,
+				ABCCD65C1C57D94100033635 /* ToDoStuff.h */,
+				ABCCD65D1C57D94100033635 /* ToDoStuff.m */,
 				ABCCD62F1C57D1F600033635 /* Main.storyboard */,
 				ABCCD6321C57D1F600033635 /* Assets.xcassets */,
 				ABCCD6341C57D1F600033635 /* LaunchScreen.storyboard */,
@@ -278,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABCCD65E1C57D94100033635 /* ToDoStuff.m in Sources */,
 				ABCCD6281C57D1F600033635 /* AppDelegate.m in Sources */,
 				ABCCD62B1C57D1F600033635 /* MasterViewController.m in Sources */,
 				ABCCD6251C57D1F600033635 /* main.m in Sources */,
