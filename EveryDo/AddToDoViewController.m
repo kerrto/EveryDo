@@ -28,6 +28,7 @@
     
     ToDoStuff *newItem =[[ToDoStuff alloc] initWithTitle:self.toDoInput.text doDescription:self.toDoDescriptionInput.text priorityNumber:self.priorityInt completedIndicator:self.completedString];
     [self.delegate itemAdded:newItem];
+    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 

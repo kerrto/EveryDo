@@ -27,13 +27,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.toDoItems=[NSMutableArray array];
     
-    ToDoStuff *cleanUp =[[ToDoStuff alloc] initWithTitle:@"Clean Up" doDescription:@"pick up your sh**" priorityNumber:1 completedIndicator:@"Incomplete"];
-    
-    ToDoStuff *doHomework=[[ToDoStuff alloc] initWithTitle:@"Do Homework" doDescription:@"do your math homework" priorityNumber:2 completedIndicator:@"Completed"];
-    
-    ToDoStuff *exercise =[[ToDoStuff alloc] initWithTitle:@"Exercise" doDescription:@"Shape your bod" priorityNumber:3 completedIndicator:@"Incomplete"];
-    
-    [self.toDoItems addObjectsFromArray:@[cleanUp, doHomework, exercise]];
+
     
     
     
@@ -51,13 +45,17 @@
 }
 
 -(void)itemAdded:(ToDoStuff*) newItem {
-        if (!self.toDoItems) {
-            self.toDoItems = [[NSMutableArray alloc] init];
-        }
-        [self.toDoItems insertObject:newItem atIndex:0];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.toDoItems.count-1 inSection:0];
-        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    if (!self.toDoItems) {
+        self.toDoItems = [[NSMutableArray alloc] init];
+    }
+    
+    [self.toDoItems insertObject:newItem atIndex:0];
+//    [self.toDoItems addObject:newItem];
+    // NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.toDoItems.count-1 inSection:0];
+    // [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     NSLog(@"ADDED!!!!");
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.tableView reloadData];
 }
 
 
@@ -65,14 +63,27 @@
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"addToViewController"]) {
+    if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSString *toDoItem= self.toDoItems[indexPath.row];
+        ToDoStuff *toDoItem= self.toDoItems[indexPath.row];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
         [controller setDetailItem:toDoItem];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
+    if ([[segue identifier] isEqualToString:@"addToViewController"]) {
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//        ToDoStuff *toDoItem= self.toDoItems[indexPath.row];
+        AddToDoViewController *controller = segue.destinationViewController;
+        controller.delegate=self;
+        controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
+        controller.navigationItem.leftItemsSupplementBackButton = YES;
+    }
+    
+    
+    
+    
+    
     
     
 }
@@ -107,7 +118,7 @@
         [desc addAttributes:strikeThrough range:NSMakeRange(0, desc.length)];
         [priority addAttributes:strikeThrough range:NSMakeRange(0, priority.length)];
     }
-
+    
     
     cell.toDoLabel.attributedText = title;
     cell.detailLabel.attributedText= desc;
