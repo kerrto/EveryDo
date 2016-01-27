@@ -212,7 +212,7 @@
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="wWQ-cM-Mfx">
                             <connections>
-                                <segue destination="r8G-ho-zkO" kind="presentation" id="R17-dt-dcT"/>
+                                <segue destination="r8G-ho-zkO" kind="presentation" identifier="addToViewController" id="R17-dt-dcT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

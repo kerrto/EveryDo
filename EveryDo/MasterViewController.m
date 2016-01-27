@@ -22,35 +22,6 @@
 
 
 
-//[super viewDidLoad];
-// Do any additional setup after loading the view, typically from a nib.
-
-//// Setup an array to hold our objects
-//self.foodItems = [NSMutableArray array];
-//
-//// Create 4 Food objects
-//Food *pizza = [[Food alloc] initWithName:@"Pizza" taste:@"Yummy!"];
-//Food *icecream = [[Food alloc] initWithName:@"Ice cream" taste:@"cold!"];
-//Food *hotdog = [[Food alloc] initWithName:@"Hot Dog" taste:@"Gross"];
-//Food *kale = [[Food alloc] initWithName:@"Kale" taste:@"Healthy"];
-//
-//// Add these to the array
-//[self.foodItems addObjectsFromArray:@[pizza, icecream, hotdog, kale]];
-//
-//// Set our view controller to be the datasource and delegate of the tableview
-//self.foodTable.dataSource = self;
-//self.foodTable.delegate = self;
-//
-//// You can set the row height for all rows using the property
-////self.foodTable.rowHeight = 100;
-//
-//// You can also create a table view in code, it works just like any other UIView
-////    UITableView *table = [[UITableView alloc] initWithFrame:CGRectZero];
-//// Register an identifier for a cell class in code
-////    [table registerClass:[MyFoodCell class] forCellReuseIdentifier:@"FoodCell"];
-////    [self.view addSubview:table];
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -79,13 +50,14 @@
     [super viewWillAppear:animated];
 }
 
-- (void)insertNewObject:(id)sender {
-    //    if (!self.toDoItems) {
-    //        self.toDoItems = [[NSMutableArray alloc] init];
-    //    }
-    //    [self.toDoItems insertObject:[NSDate date] atIndex:0];
-    //    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.toDoItems.count-1 inSection:0];
-    //    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+-(void)itemAdded:(ToDoStuff*) newItem {
+        if (!self.toDoItems) {
+            self.toDoItems = [[NSMutableArray alloc] init];
+        }
+        [self.toDoItems insertObject:newItem atIndex:0];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.toDoItems.count-1 inSection:0];
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    NSLog(@"ADDED!!!!");
 }
 
 
@@ -93,7 +65,7 @@
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+    if ([[segue identifier] isEqualToString:@"addToViewController"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSString *toDoItem= self.toDoItems[indexPath.row];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
@@ -102,21 +74,6 @@
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
     
-    //    - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    //
-    //        if ([segue.identifier isEqualToString:@"showFoodItem"]) {
-    //
-    //            // Get the selected index path
-    //            NSIndexPath *selectedIndexPath = [self.foodTable indexPathForSelectedRow];
-    //
-    //            // Use the selected index path to get the food object it was displaying
-    //            Food *selectedFood = self.foodItems[selectedIndexPath.row];
-    //
-    //            // Pass that to our new view controller
-    //            DetailViewController *dvc = (DetailViewController *)segue.destinationViewController;
-    //            dvc.foodObject = selectedFood;
-    //        }
-    //    }
     
 }
 

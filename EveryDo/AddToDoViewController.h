@@ -7,18 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ToDoStuff.h"
 
 @class AddToDoViewController;
 
 @protocol AddToDoViewControllerDelegate
 
-
-
-@optional
+-(void)itemAdded:(ToDoStuff*) newItem;
 
 
 
 @end
+
 
 @interface AddToDoViewController : UIViewController
 

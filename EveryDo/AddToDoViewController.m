@@ -26,7 +26,8 @@
         self.completedString=@"Completed";}
     self.priorityInt=[self.priority.text intValue];
     
-    ToDoStuff *newItem =[[ToDoStuff alloc] initWithTitle:self.toDoInput.text doDescription:self.toDoDescriptionInput.text priorityNumber:self.priorityInt completedIndicator:self.completedIndicator];
+    ToDoStuff *newItem =[[ToDoStuff alloc] initWithTitle:self.toDoInput.text doDescription:self.toDoDescriptionInput.text priorityNumber:self.priorityInt completedIndicator:self.completedString];
+    [self.delegate itemAdded:newItem];
     
 }
 
