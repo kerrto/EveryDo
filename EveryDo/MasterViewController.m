@@ -14,29 +14,24 @@
 
 @interface MasterViewController () <UITableViewDataSource,UITableViewDelegate,AddToDoViewControllerDelegate>
 
+-(IBAction)swipeReorder:(UISwipeGestureRecognizerDirection*)sender;
+
 @property NSMutableArray *toDoItems;
 
 @end
 
 @implementation MasterViewController
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.toDoItems=[NSMutableArray array];
     
-
-    
-    
-    
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    
-    
-    
-    
+
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+   
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -50,15 +45,18 @@
     }
     
     [self.toDoItems insertObject:newItem atIndex:0];
-//    [self.toDoItems addObject:newItem];
-    // NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.toDoItems.count-1 inSection:0];
-    // [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     NSLog(@"ADDED!!!!");
     [self.navigationController popToRootViewControllerAnimated:YES];
     [self.tableView reloadData];
 }
 
-
+-(void)swipeReorder:(UISwipeGestureRecognizerDirection *)sender {
+    if (UISwipeGestureRecognizerDirectionRight){
+        NSSortDescriptor* sortByPriority = [NSSortDescriptor sortDescriptorWithKey:@"priority" ascending:YES];
+        [self.toDoItems sortUsingDescriptors:[NSArray arrayWithObject:sortByPriority]];
+        [self.tableView reloadData];
+    }
+}
 
 #pragma mark - Segues
 
@@ -72,20 +70,11 @@
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
     if ([[segue identifier] isEqualToString:@"addToViewController"]) {
-//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//        ToDoStuff *toDoItem= self.toDoItems[indexPath.row];
         AddToDoViewController *controller = segue.destinationViewController;
         controller.delegate=self;
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
     }
-    
-    
-    
-    
-    
-    
-    
 }
 
 #pragma mark - Table View
@@ -108,7 +97,6 @@
     NSMutableAttributedString *desc = [[NSMutableAttributedString alloc] initWithString:currentItem.doDescription];
     NSMutableAttributedString *priority = [[NSMutableAttributedString alloc] initWithString:@(currentItem.priority).stringValue];
     
-    // alloc 3 mutable
     
     if ([currentItem.completedIndicator isEqualToString:@"Completed"]) {
         

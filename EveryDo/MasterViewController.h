@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
 
+@property (strong, nonatomic) NSArray *sortedEventArray;
+
 
 @end
 
